@@ -1,30 +1,20 @@
-const crt = {
-    descripcion: {
-        demand: true,
-        alias: 'd',
-        desc: 'Descripcion de la tarea por hacer'
-    }
+const descripcion = {
+    demand: true,
+    alias: 'd',
+    desc: 'Descripcion de la tarea por hacer'
+};
+
+const completado = {
+    default: true,
+    alias: 'c',
+    desc: 'Marca la tarea como completada o pendiente'
 }
 
-const upd = {
-    descripcion: {
-        demand: true,
-        alias: 'd'
-    },
-    completado: {
-        default: true,
-        alias: 'c',
-        desc: 'Marca la tarea como completada o pendiente'
-    }
-}
+const crt = {descripcion}
 
-const del = {
-    descripcion: {
-        demand: true,
-        alias: 'd',
-        desc: ''
-    }
-}
+const upd = {descripcion,completado}
+
+const del = {descripcion}
 
 const argv = require('yargs')
                 .command('crear', 'Crea una tarea TO DO',crt)
