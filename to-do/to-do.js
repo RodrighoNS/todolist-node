@@ -20,17 +20,6 @@ const chargeDB = () => {
     }
 }
 
-const getList = () => {
-    chargeDB();
-    try {
-        todolist = require('../db/data.json');
-    } catch (err) {
-        todolist = []
-    }
-
-    return todolist;
-}
-
 const crear = (descripcion) => {
 
     chargeDB();
@@ -44,9 +33,55 @@ const crear = (descripcion) => {
     saveDB();
 
     return todo;
+};
+
+const getList = () => {
+    chargeDB();
+    try {
+        todolist = require('../db/data.json');
+    } catch (err) {
+        todolist = []
+    }
+
+    return todolist;
+};
+
+const update = (descripcion, completado = true) => {
+    chargeDB();
+
+    let index = todolist.findIndex(task => {
+        return task.descripcion === descripcion;
+    })
+
+    if(index >= 0){
+        todolist[index].completado = completado;
+        saveDB();
+        return true;
+    }else{
+        return false;
+    }
+};
+
+const delete_ = (descripcion) => {
+    chargeDB();
+
+    let newList = todolist.filter((task)=>{
+        return task.descripcion !== descripcion;
+    }); 
+
+    if(newList.length === todolist.length){
+        
+        return false;
+    }else {
+        todolist = newList;
+        saveDB();
+        return true;
+    }
 }
 
 module.exports = {
     crear,
-    getList
+    getList,
+    update,
+    delete_
 }

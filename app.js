@@ -22,6 +22,13 @@ switch(comando){
         break;
     case 'actualizar':
         console.log('Actualiza una tarea');
+        let updt = todo_.update(argv.descripcion, argv.completado);
+        console.log(updt);
+        break;
+
+    case 'borrar':
+        let borrado = todo_.delete_(argv.descripcion);
+        console.log(borrado);
         break;
 
     default:
